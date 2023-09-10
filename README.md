@@ -15,21 +15,21 @@ Prerequisites for Local Deployment
 Before you begin the deployment process, ensure you have the following tools and configurations set up on your system:
 Essential Tools:
 
-    Kubectl: The Kubernetes command-line tool that allows you to run commands against Kubernetes clusters.
+Kubectl: The Kubernetes command-line tool that allows you to run commands against Kubernetes clusters.
         Installation Guide - https://kubernetes.io/docs/tasks/tools/
 
-    Minikube: A tool that lets you run Kubernetes locally. Minikube runs a single-node Kubernetes cluster on your personal computer.
+Minikube: A tool that lets you run Kubernetes locally. Minikube runs a single-node Kubernetes cluster on your personal computer.
         Installation Guide - https://minikube.sigs.k8s.io/docs/start/
 
-    Helm: A package manager for Kubernetes, which allows you to define, install, and upgrade even the most complex Kubernetes applications.
+Helm: A package manager for Kubernetes, which allows you to define, install, and upgrade even the most complex Kubernetes applications.
         Installation Guide - https://helm.sh/docs/intro/install/
 
 For Windows Users:
 
-    Docker Desktop: A platform for developing, shipping, and running applications inside containers. The Windows version provides Kubernetes support.
+Docker Desktop: A platform for developing, shipping, and running applications inside containers. The Windows version provides Kubernetes support.
         Installation Guide - https://docs.docker.com/desktop/install/windows-install/
 
-    WSL 2 (Windows Subsystem for Linux, Version 2): An improved version of WSL, it provides a compatibility layer for running Linux binary executables natively on Windows.
+WSL 2 (Windows Subsystem for Linux, Version 2): An improved version of WSL, it provides a compatibility layer for running Linux binary executables natively on Windows.
         It's recommended for a smoother experience with Docker Desktop and Kubernetes on Windows.
         Installation Guide - https://learn.microsoft.com/en-us/windows/wsl/install
 
