@@ -40,8 +40,6 @@ Note: Ensure all tools are correctly configured and accessible from your command
 ```bash
 git clone https://github.com/MarcoB95-lab/polkadot-watcher-transaction.git
 cd polkadot-watcher-transaction
-cp config/main.sample.yaml config/main.yaml 
-#just the first time
 
 yarn
 yarn build
@@ -49,7 +47,7 @@ yarn build
 # Start a local Kubernetes cluster with minikube
 minikube start
 
-# Deploy your application (assuming you use Helm for deployment and are in the directory "polkadot-watcher-csv-exporter")
+# Deploy your application (assuming you use Helm for deployment and are in the directory "polkadot-watcher-transaction")
 # helm install <release-name> <path-to-your-helm-chart>
 helm install polkadot charts/polkadot-watcher-transaction
 
