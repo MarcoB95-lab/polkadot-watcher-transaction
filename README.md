@@ -42,7 +42,6 @@ cd polkadot-watcher-transaction
 cp config/main.sample.yaml config/main.yaml 
 #just the first time
 
-
 yarn
 yarn build
 
