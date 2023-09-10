@@ -4,18 +4,59 @@
 
 ## How to Run 
 
+Local Deployment Guide for polkadot-watcher-transaction
+
 ### Requirements
+
 - yarn: https://classic.yarnpkg.com/en/docs/install/
 
+Prerequisites for Local Deployment
+
+Before you begin the deployment process, ensure you have the following tools and configurations set up on your system:
+Essential Tools:
+
+    Kubectl: The Kubernetes command-line tool that allows you to run commands against Kubernetes clusters.
+        Installation Guide - https://kubernetes.io/docs/tasks/tools/
+
+    Minikube: A tool that lets you run Kubernetes locally. Minikube runs a single-node Kubernetes cluster on your personal computer.
+        Installation Guide - https://minikube.sigs.k8s.io/docs/start/
+
+    Helm: A package manager for Kubernetes, which allows you to define, install, and upgrade even the most complex Kubernetes applications.
+        Installation Guide - https://helm.sh/docs/intro/install/
+
+For Windows Users:
+
+    Docker Desktop: A platform for developing, shipping, and running applications inside containers. The Windows version provides Kubernetes support.
+        Installation Guide - https://docs.docker.com/desktop/install/windows-install/
+
+    WSL 2 (Windows Subsystem for Linux, Version 2): An improved version of WSL, it provides a compatibility layer for running Linux binary executables natively on Windows.
+        It's recommended for a smoother experience with Docker Desktop and Kubernetes on Windows.
+        Installation Guide - https://learn.microsoft.com/en-us/windows/wsl/install
+
+Note: Ensure all tools are correctly configured and accessible from your command line or terminal. You can typically verify installations with commands like kubectl version, minikube version, and helm version.
+
+
 ```bash
-git clone https://github.com/w3f/polkadot-watcher-csv-exporter.git
-cd polkadot-watcher-csv-exporter
+git clone https://github.com/MarcoB95-lab/polkadot-watcher-transaction.git
+cd polkadot-watcher-transaction
 cp config/main.sample.yaml config/main.yaml 
 #just the first time
 
+
 yarn
 yarn build
-yarn start
+
+# Start a local Kubernetes cluster with minikube
+minikube start
+
+# Deploy your application (assuming you use Helm for deployment and are in the directory "polkadot-watcher-csv-exporter")
+helm install polkadot charts/polkadot-watcher-transaction
+
+# open 4 powershell terminals and start the applications to be able to access them in the browser
+kubectl port-forward svc/polkadot 3000:3000 -n default
+kubectl port-forward svc/polkadot-kube-prometheus-s-prometheus 9090:9090 -n default
+kubectl port-forward svc/polkadot-kube-prometheus-s-alertmanager 9093:9093 -n default
+kubectl port-forward svc/polkadot-grafana 3003:80 -n default
 ```
 
 ## About
@@ -31,121 +72,3 @@ The main use case of this application consits of a scanner that can be configure
 
 A sample config file is provided [here](/config/main.sample.yaml)
 
-```
-polkadot-watcher-transaction
-├─ .circleci
-│  └─ config.yml
-├─ .dockerignore
-├─ .eslintignore
-├─ .eslintrc.js
-├─ .eslintrc.json
-├─ .git
-│  ├─ config
-│  ├─ description
-│  ├─ HEAD
-│  ├─ hooks
-│  │  ├─ applypatch-msg.sample
-│  │  ├─ commit-msg.sample
-│  │  ├─ fsmonitor-watchman.sample
-│  │  ├─ post-update.sample
-│  │  ├─ pre-applypatch.sample
-│  │  ├─ pre-commit.sample
-│  │  ├─ pre-merge-commit.sample
-│  │  ├─ pre-push.sample
-│  │  ├─ pre-rebase.sample
-│  │  ├─ pre-receive.sample
-│  │  ├─ prepare-commit-msg.sample
-│  │  ├─ push-to-checkout.sample
-│  │  └─ update.sample
-│  ├─ index
-│  ├─ info
-│  │  └─ exclude
-│  ├─ logs
-│  │  ├─ HEAD
-│  │  └─ refs
-│  │     ├─ heads
-│  │     │  └─ master
-│  │     └─ remotes
-│  │        └─ origin
-│  │           └─ HEAD
-│  ├─ objects
-│  │  ├─ info
-│  │  └─ pack
-│  │     ├─ pack-92f182163f1ece75ecdd6792013d871bd50a25ce.idx
-│  │     └─ pack-92f182163f1ece75ecdd6792013d871bd50a25ce.pack
-│  ├─ packed-refs
-│  └─ refs
-│     ├─ heads
-│     │  └─ master
-│     ├─ remotes
-│     │  └─ origin
-│     │     └─ HEAD
-│     └─ tags
-├─ .github
-│  ├─ dependabot.yml
-│  └─ workflows
-│     ├─ dependency-review.yml
-│     └─ yarn_upgrade.yml
-├─ .gitignore
-├─ charts
-│  └─ polkadot-watcher-transaction
-│     ├─ Chart.yaml
-│     ├─ templates
-│     │  ├─ alertrules-balance-threshold.yaml
-│     │  ├─ alertrules.yaml
-│     │  ├─ configmap.yaml
-│     │  ├─ cronjob-pod-restart.yaml
-│     │  ├─ deployment.yaml
-│     │  ├─ pvc.yaml
-│     │  ├─ service.yaml
-│     │  └─ servicemonitor.yaml
-│     └─ values.yaml
-├─ Dockerfile
-├─ helmfile.d
-│  └─ 100-polkadot-watcher-transaction.yaml
-├─ LICENSE
-├─ package.json
-├─ README.md
-├─ scripts
-│  ├─ integration-tests.sh
-│  ├─ start-kind-local-registry.sh
-│  └─ test_prometheus_rules.sh
-├─ src
-│  ├─ actions
-│  │  └─ start.ts
-│  ├─ constants.ts
-│  ├─ gitConfigLoader
-│  │  ├─ disabled.ts
-│  │  ├─ gitConfigLoaderFactory.ts
-│  │  ├─ gitConfigLoaderInterface.ts
-│  │  ├─ gitHub1kv.ts
-│  │  ├─ gitLabPrivate.ts
-│  │  └─ types.ts
-│  ├─ index.ts
-│  ├─ logger.ts
-│  ├─ notifier
-│  │  ├─ disabled.ts
-│  │  ├─ INotifier.ts
-│  │  ├─ matrixbot.ts
-│  │  └─ NotifierFactory.ts
-│  ├─ prometheus
-│  │  └─ alertrules.yaml
-│  ├─ prometheus.ts
-│  ├─ subscriber.ts
-│  ├─ subscriptionModules
-│  │  ├─ balanceBelowThreshold.ts
-│  │  ├─ eventScannerBased.ts
-│  │  └─ ISubscribscriptionModule.ts
-│  ├─ types.ts
-│  └─ utils.ts
-├─ test
-│  ├─ matrixbot.ts
-│  ├─ mocks.ts
-│  ├─ prometheus
-│  │  └─ alertrules.yaml
-│  ├─ subscriber.ts
-│  └─ utils.ts
-├─ tsconfig.json
-└─ yarn.lock
-
-```
