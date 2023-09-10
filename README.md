@@ -50,6 +50,7 @@ yarn build
 minikube start
 
 # Deploy your application (assuming you use Helm for deployment and are in the directory "polkadot-watcher-csv-exporter")
+# helm install <release-name> <path-to-your-helm-chart>
 helm install polkadot charts/polkadot-watcher-transaction
 
 # open 4 powershell terminals and start the applications to be able to access them in the browser
