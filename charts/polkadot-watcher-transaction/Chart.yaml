@@ -3,3 +3,8 @@ name: polkadot-watcher-transaction
 version: v1.3.1
 appVersion: v1.3.1
 apiVersion: v2
+
+dependencies:
+- name: kube-prometheus-stack
+  version: "50.3.1"
+  repository: "https://prometheus-community.github.io/helm-charts"

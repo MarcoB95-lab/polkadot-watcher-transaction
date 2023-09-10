@@ -30,3 +30,122 @@ The main use case of this application consits of a scanner that can be configure
 ## Configuration
 
 A sample config file is provided [here](/config/main.sample.yaml)
+
+```
+polkadot-watcher-transaction
+├─ .circleci
+│  └─ config.yml
+├─ .dockerignore
+├─ .eslintignore
+├─ .eslintrc.js
+├─ .eslintrc.json
+├─ .git
+│  ├─ config
+│  ├─ description
+│  ├─ HEAD
+│  ├─ hooks
+│  │  ├─ applypatch-msg.sample
+│  │  ├─ commit-msg.sample
+│  │  ├─ fsmonitor-watchman.sample
+│  │  ├─ post-update.sample
+│  │  ├─ pre-applypatch.sample
+│  │  ├─ pre-commit.sample
+│  │  ├─ pre-merge-commit.sample
+│  │  ├─ pre-push.sample
+│  │  ├─ pre-rebase.sample
+│  │  ├─ pre-receive.sample
+│  │  ├─ prepare-commit-msg.sample
+│  │  ├─ push-to-checkout.sample
+│  │  └─ update.sample
+│  ├─ index
+│  ├─ info
+│  │  └─ exclude
+│  ├─ logs
+│  │  ├─ HEAD
+│  │  └─ refs
+│  │     ├─ heads
+│  │     │  └─ master
+│  │     └─ remotes
+│  │        └─ origin
+│  │           └─ HEAD
+│  ├─ objects
+│  │  ├─ info
+│  │  └─ pack
+│  │     ├─ pack-92f182163f1ece75ecdd6792013d871bd50a25ce.idx
+│  │     └─ pack-92f182163f1ece75ecdd6792013d871bd50a25ce.pack
+│  ├─ packed-refs
+│  └─ refs
+│     ├─ heads
+│     │  └─ master
+│     ├─ remotes
+│     │  └─ origin
+│     │     └─ HEAD
+│     └─ tags
+├─ .github
+│  ├─ dependabot.yml
+│  └─ workflows
+│     ├─ dependency-review.yml
+│     └─ yarn_upgrade.yml
+├─ .gitignore
+├─ charts
+│  └─ polkadot-watcher-transaction
+│     ├─ Chart.yaml
+│     ├─ templates
+│     │  ├─ alertrules-balance-threshold.yaml
+│     │  ├─ alertrules.yaml
+│     │  ├─ configmap.yaml
+│     │  ├─ cronjob-pod-restart.yaml
+│     │  ├─ deployment.yaml
+│     │  ├─ pvc.yaml
+│     │  ├─ service.yaml
+│     │  └─ servicemonitor.yaml
+│     └─ values.yaml
+├─ Dockerfile
+├─ helmfile.d
+│  └─ 100-polkadot-watcher-transaction.yaml
+├─ LICENSE
+├─ package.json
+├─ README.md
+├─ scripts
+│  ├─ integration-tests.sh
+│  ├─ start-kind-local-registry.sh
+│  └─ test_prometheus_rules.sh
+├─ src
+│  ├─ actions
+│  │  └─ start.ts
+│  ├─ constants.ts
+│  ├─ gitConfigLoader
+│  │  ├─ disabled.ts
+│  │  ├─ gitConfigLoaderFactory.ts
+│  │  ├─ gitConfigLoaderInterface.ts
+│  │  ├─ gitHub1kv.ts
+│  │  ├─ gitLabPrivate.ts
+│  │  └─ types.ts
+│  ├─ index.ts
+│  ├─ logger.ts
+│  ├─ notifier
+│  │  ├─ disabled.ts
+│  │  ├─ INotifier.ts
+│  │  ├─ matrixbot.ts
+│  │  └─ NotifierFactory.ts
+│  ├─ prometheus
+│  │  └─ alertrules.yaml
+│  ├─ prometheus.ts
+│  ├─ subscriber.ts
+│  ├─ subscriptionModules
+│  │  ├─ balanceBelowThreshold.ts
+│  │  ├─ eventScannerBased.ts
+│  │  └─ ISubscribscriptionModule.ts
+│  ├─ types.ts
+│  └─ utils.ts
+├─ test
+│  ├─ matrixbot.ts
+│  ├─ mocks.ts
+│  ├─ prometheus
+│  │  └─ alertrules.yaml
+│  ├─ subscriber.ts
+│  └─ utils.ts
+├─ tsconfig.json
+└─ yarn.lock
+
+```

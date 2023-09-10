@@ -39,8 +39,13 @@ export class BalanceBelowThreshold implements ISubscriptionModule{
           }
           this.promClient.updateCurrentBalance(this.networkId,account.name,account.address,balance)
           this.logger.info(`Account: ${account.name} | Address ${account.address} -> Balance: ${balance}`);
-        });
-      });
+
+          // Check if balance is below threshold and log a warning
+          if (balance < account.threshold) {
+          this.logger.info(`Account: ${account.name} | Address ${account.address} has a balance below the threshold! Current balance: ${balance}, Threshold: ${account.threshold}`);
+          }
+    });
+  });
     }
 
   

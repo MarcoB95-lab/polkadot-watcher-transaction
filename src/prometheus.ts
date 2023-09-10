@@ -44,11 +44,11 @@ export class Prometheus implements PromClient {
     }
     
     updateCurrentBalance(network: string, name: string, address: string, balance: number): void {
-      this.balanceCurrent.set({network:network, name, address, environment: this.environment }, balance);        
+      this.balanceCurrent.set({ network: network, name, address, environment: this.environment }, balance);
     }
-
+    
     updateDesiredBalance(network: string, name: string, address: string, balance: number = this.defaultBalanceDesired): void {
-      this.balanceDesired.set({network:network, name, address, environment: this.environment }, balance);        
+      this.balanceDesired.set({ network: network, name, address, environment: this.environment }, balance);
     }
 
     _initMetrics(): void {

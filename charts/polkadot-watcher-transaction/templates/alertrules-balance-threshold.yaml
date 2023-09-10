@@ -17,11 +17,22 @@ spec:
     rules:
     - alert: AccountBalanceBelowDesired
       annotations:
-        message: 'Target <a href="https://{{`{{ $labels.network }}`}}.subscan.io/account/{{`{{ $labels.address }}`}}">{{`{{ $labels.name }}`}}</a> has less tokens than expected...'
+        summary: 'Balance Alert for {{`{{ $labels.name }}`}}'
+        description: 'Address {{`{{ $labels.address }}`}} named {{`{{ $labels.name }}`}} has a current balance of {{`{{ $value }}`}} which is below the desired threshold.'
       expr: max without(instance,pod) (last_over_time(polkadot_account_balance_desired[10m]) - last_over_time(polkadot_account_balance_current[10m])) > 0  
       for: 2m
       labels:
         severity: warning
-        origin: {{ .Values.prometheusRules.origin }} 
+        origin: {{ .Values.prometheusRules.origin }}
+
+    - alert: AccountBalanceAboveDesired
+      annotations:
+        summary: 'Balance Alert for {{`{{ $labels.name }}`}}'
+        description: 'Address {{`{{ $labels.address }}`}} named {{`{{ $labels.name }}`}} has a current balance of {{`{{ $value }}`}} which is above the desired threshold.'
+      expr: max without(instance,pod) (last_over_time(polkadot_account_balance_current[10m]) - last_over_time(polkadot_account_balance_desired[10m])) > 0  
+      for: 2m
+      labels:
+        severity: warning
+        origin: {{ .Values.prometheusRules.origin }}
 {{ end }}        
 {{ end }}

@@ -1,44 +1,71 @@
 image:
   repo: web3f/polkadot-watcher-transaction
-  #tag: latest
 
 config:
   endpoint: "wss://kusama-rpc.polkadot.io/"
   port: 3000
   logLevel: info
-  environment: production #it is used also to filter the prometheusrules, i.e. to avoid conflicts between production and staging
+  environment: production
   matrixbot:
     enabled: true
     endpoint: "http://matrixbot:8080/skill/eventmanager/webhook"
   subscriber:
     modules:
       balanceBelowThreshold:
-        enabled: false
+        enabled: true
         threshold: 10
       transferEventScanner:
         enabled: true
-        #startFromBlock: 10527640 
         sent: true
         received: true
         dataDir: "/app/data"
-        scanIntervalMillis: 300000 #5 minutes
+        scanIntervalMillis: 300000
         retriesBeforeLeave: 5
         delayBeforeRetryMillis: 5000
-    subscriptionsFromGit: #optional
+    subscriptionsFromGit:
       enabled: false
       targets:
-      - platform: GitLab
-        private:
-          enabled: true
-          apiToken: xxx
-        network: kusama
-        url: https://your.gitlab.domain/api/v4/projects/number/repository/files/accounts.yaml/raw?ref=main     
-    subscriptions: #optional
-    - name: faucet
-      address: EaG2CRhJWPb7qmdcJvy3LiWdh26Jreu9Dx6R1rXxPmYXoDk 
+        - platform: GitLab
+          private:
+            enabled: true
+            apiToken: xxx
+          network: kusama
+          url: https://your.gitlab.domain/api/v4/projects/number/repository/files/accounts.yaml/raw?ref=main
+    subscriptions:
+      - name: faucet
+        address: EaG2CRhJWPb7qmdcJvy3LiWdh26Jreu9Dx6R1rXxPmYXoDk
+        threshold: 500 # Custom threshold for this address
+      - name: myAddress
+        address: HFFZ1bRayy7ouqVJL2T5g8CitavrmnDCtRQpQnevVx1qoY5
+        threshold: 500 # Custom threshold for this address
+      - name: whale1
+        address: EGP7XztdTosm1EmaATZVMjSWujGEj9nNidhjqA2zZtttkFg
+        threshold: 500 # Custom threshold for this address
+      - name: whale2
+        address: E7ncQKp4xayUoUdpraxBjT7NzLoayLJA4TuPcKKboBkJ5GH
+        threshold: 500000 # Custom threshold for this address
+      - name: whale3
+        address: G7UkJAutjbQyZGRiP8z5bBSBPBJ66JbTKAkFDq3cANwENyX
+        threshold: 500 # Custom threshold for this address
+
+kube-prometheus-stack:
+  defaultRules:
+    create: false
+  prometheus:
+    prometheusSpec:
+      serviceMonitorSelectorNilUsesHelmValues: false
+      serviceMonitorSelector: 
+        matchLabels:
+          release: prometheus-operator
+  alertmanager:
+    alertmanagerSpec:
+      serviceMonitorSelectorNilUsesHelmValues: false
+      serviceMonitorSelector: 
+        matchLabels:
+          release: prometheus-operator
 
 serviceMonitor:
-  enabled: false
+  enabled: true
   labels:
     group: w3f
     release: prometheus-operator
@@ -50,18 +77,15 @@ restarter:
     repo: web3f/pod-restarter
     tag: v0.1.1
 
-
 prometheusRules:
-  enabled: false
+  enabled: true
   labels:
     app: w3f
-    role: alert-rules #according to https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/alerting.md#prometheusrule-labelling
+    role: alert-rules
+    release: polkadot
   origin: clusterName
 
 resources:
   requests:
     cpu: "50m"
     memory: "100Mi"
-  #limits:
-  #  cpu: "200m"
-  #  memory: "300Mi"
