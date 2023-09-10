@@ -13,7 +13,8 @@ Local Deployment Guide for polkadot-watcher-transaction
 **Prerequisites for Local Deployment**
 
 Before you begin the deployment process, ensure you have the following tools and configurations set up on your system:
-Essential Tools:
+
+**Essential Tools:**
 
 **Kubectl**: The Kubernetes command-line tool that allows you to run commands against Kubernetes clusters.
         Installation Guide - https://kubernetes.io/docs/tasks/tools/
