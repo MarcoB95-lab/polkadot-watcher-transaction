@@ -60,6 +60,7 @@ kubectl port-forward svc/polkadot-grafana 3003:80 -n default
 ```
 
 Now you can access your polkadot-watcher-transaction application, prometheus, alertmanager and grafana via the browser:
+
 http://localhost:3000/metrics
 
 http://localhost:9090/graph
