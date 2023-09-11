@@ -45,7 +45,7 @@ cd polkadot-watcher-transaction
 yarn
 yarn build
 
-# Start a local Kubernetes cluster with minikube
+# Start a local Kubernetes cluster with minikube in powershell
 minikube start
 
 # Deploy your application (assuming you use Helm for deployment and are in the directory "polkadot-watcher-transaction")
