@@ -69,6 +69,13 @@ http://localhost:9093/#/alerts
 
 http://localhost:3003/login (admin:prom-operator)
 
+## Additional Information
+
+The blockchain's WSS RPC Endpoint that we monitor is located at <YOUR_PATH>/polkadot-watcher-transaction/charts/polkadot-watcher-transaction/values.yaml. By default, it's set to the Kusama RPC. However, if you wish to monitor a different chain, such as Astar Network, simply modify the RPC Endpoint to: wss://rpc.astar.network.
+
+Additionally, you can list the wallets you want to monitor within the values.yaml file and designate a specific threshold. If this threshold is breached, an alert will be triggered on Prometheus, which will then be forwarded to Alertmanager.
+
+
 ## About
 
 The main use case of this application consits of a scanner that can be configured to start from a configured block number, and then it keeps monitoring the on-chain situation delivering alerts to a notifier. For instance, you can deliver the alerts to a matrixbot instance, which will forward the message to a Matrix/Synapse channel.
